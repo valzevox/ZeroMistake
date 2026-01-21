@@ -1,0 +1,63 @@
+
+
+/* === BASE ANIMATIONS === */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes fire {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes snow {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}
+
+.glass-panel-outer[data-animation="true"] {
+  animation: var(--animation-type) 2s infinite;
+}
+
+/* === NEW: INSTRUMENT PANEL ANIMATIONS === */
+
+/* 1. Pulse Glow (Cho Streak thấp) */
+@keyframes instrument-pulse {
+  0% { box-shadow: 0 0 5px var(--glow-color); }
+  50% { box-shadow: 0 0 15px var(--glow-color), 0 0 5px var(--glow-color) inset; }
+  100% { box-shadow: 0 0 5px var(--glow-color); }
+}
+
+.pulse-active {
+  animation: instrument-pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  border-color: var(--glow-color) !important;
+}
+
+/* 2. Glitch Effect (Cho Streak cao / Dragon Mode) */
+.glitch-active {
+  position: relative;
+  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+  color: var(--glow-color);
+  text-shadow: 2px 0 #ff0000, -2px 0 #0000ff;
+}
+
+@keyframes glitch-skew {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(-2deg); }
+  40% { transform: skew(2deg); }
+  60% { transform: skew(-1deg); }
+  80% { transform: skew(1deg); }
+  100% { transform: skew(0deg); }
+}
+
+/* 3. 3D Tilt Support */
+.tilt-parent {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.tilt-child {
+  transform: translateZ(20px);
+}
